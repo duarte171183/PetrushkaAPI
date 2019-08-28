@@ -5,4 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create(email: 'admin@example.com', nickname: 'admin', name: 'admin', password: "secret123")
+#User.create(email: 'admin@example.com', nickname: 'admin', name: 'admin', password: "secret123")
+#category = Category.create([{description: 'vestido largo', revenue: '350', commission: '25'}, {description: 'short o blusa', revenue: '150', commission: '22'}])
+#size = Size.create([{code: 'ch', description: 'chica'}, {code: 'm', description: 'mediana'}, {code: 'g', description: 'grande'}, {code: 'eg', description: 'extra grande'}])
+stores = Store.create([{name: 'Boutique'}, {name: 'almacen'}])

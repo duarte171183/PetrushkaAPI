@@ -10,10 +10,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190729180705) do
+ActiveRecord::Schema.define(version: 20190813041430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "brands", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "description"
+    t.decimal "revenue"
+    t.decimal "commission"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "description"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "style_id"
+    t.bigint "size_id"
+    t.bigint "store_id"
+    t.index ["size_id"], name: "index_products_on_size_id"
+    t.index ["store_id"], name: "index_products_on_store_id"
+    t.index ["style_id"], name: "index_products_on_style_id"
+  end
+
+  create_table "sizes", force: :cascade do |t|
+    t.string "code"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "styles", force: :cascade do |t|
+    t.string "code"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "brand_id"
+    t.bigint "category_id"
+    t.index ["brand_id"], name: "index_styles_on_brand_id"
+    t.index ["category_id"], name: "index_styles_on_category_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -40,4 +91,9 @@ ActiveRecord::Schema.define(version: 20190729180705) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "products", "sizes"
+  add_foreign_key "products", "stores"
+  add_foreign_key "products", "styles"
+  add_foreign_key "styles", "brands"
+  add_foreign_key "styles", "categories"
 end

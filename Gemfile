@@ -21,7 +21,7 @@ gem 'puma', '~> 3.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'omniauth-rails_csrf_protection'
 gem 'devise_token_auth'
 gem 'omniauth'
 
